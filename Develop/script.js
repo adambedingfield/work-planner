@@ -1,110 +1,141 @@
+// displays current day at top
 var weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var day = new Date();
 var displayDay = weekday[day.getDay()];
 var currentDate = moment().format(' MMMM Do');
 var showDate = $(currentDay).text(displayDay + ',' + currentDate);
-var timeOfDay = [
-    {
-        time: "09",
-        hour: "9",
-        meridiem: "am",
-        userInput: "",
-        id: "0"
-    },
-    {
-        time: "10",
-        hour: "10",
-        meridiem: "am",
-        userInput: "",
-        id: "1"
-    },
-    {
-        time: "11",
-        hour: "11",
-        meridiem: "am",
-        userInput: "",
-        id: "2"
-    },
-    {
-        time: "12",
-        hour: "12",
-        meridiem: "pm",
-        userInput: "",
-        id: "3"
-    },
-    {
-        time: "13",
-        hour: "1",
-        meridiem: "pm",
-        userInput: "",
-        id: "4"
-    },
-    {
-        time: "14",
-        hour: "2",
-        meridiem: "pm",
-        userInput: "",
-        id: "5"
-    },
-    {
-        time: "15",
-        hour: "3",
-        meridiem: "pm",
-        userInput: "",
-        id: "6"
-    },
-    {
-        time: "16",
-        hour: "4",
-        meridiem: "pm",
-        userInput: "",
-        id: "7"
-    },
-    {
-        time: "17",
-        hour: "5",
-        meridiem: "pm",
-        userInput: "",
-        id: "8"
-    },
-    
-]
+// sets variable for determining time of day and getting html element
+var time = ["9", "10", "11", "12", "13", "14", "15", "16", "17"];
+var nine = document.getElementById('9');
+var ten = document.getElementById('10');
+var eleven = document.getElementById('11');
+var twelve = document.getElementById('12');
+var one = document.getElementById('13');
+var two = document.getElementById('14');
+var three = document.getElementById('15');
+var four = document.getElementById('16');
+var five = document.getElementById('17');
 
-timeOfDay.forEach(function(thisHour) {
-    // time, task, and save row
-    var hourRow = $("<div>").addClass("row");
-    $(".container").append(hourRow);
+// check if time is in past, present, or future and change background color
+updatetime();
 
-    // creates time field
-    hourContainer = $("<div>").addClass("col-1 time-block");
-    var taskHour = $("<div>").text(thisHour.hour + thisHour.meridiem);
-    taskHour.addClass("hour");
-    hourContainer.append(taskHour);
-
-    // task container
-    var taskContainer = $("<div>").addClass("col-10")
-    var taskInput = $("<textarea>");
-    taskInput.addClass("col-12");
-    taskInput.attr("id", this.id);
-    taskContainer.append(taskInput);
-
-    if (thisHour.time < moment().format("HH")) {
-        taskInput.addClass("past");
-    } else if (thisHour.time === moment().format("HH")) {
-        taskInput.addClass("present");
-    } else if (thisHour.time > moment().format("HH")) {
-        taskInput.addClass("future");
+function updatetime() {
+    var checkTime = moment().format('H');
+    for(var i = 0; i < time.length; i++) {
+  
+      if (parseInt(time[i]) > checkTime) {
+        $("#" + time[i]).addClass("future");
+  
+  
+      }
+      else if (parseInt(time[i]) < checkTime) {
+        $("#" + time[i]).addClass("past");
+  
+      }
+      else if (parseInt(time[i]) == checkTime) {
+        $("#" + time[i]).addClass("present");
+      
+      }
     }
+};
 
-    // save button
-    var saveContainer = $("<div>").addClass("saveBtn clipboard:hover col-1");
-    var saveButton = $("<button>");
-    saveButton.addClass("oi oi-clipboard clipboard");
-    saveContainer.append(saveButton);
+// 9 AM save
+var saveNine = document.getElementById('9Save');
+var saveNineField = () => {
+  let nineText = nine.value;
+  localStorage.setItem("nine", nineText);
+  console.log(localStorage.getItem("nine"));
+}
+saveNine.addEventListener("click", saveNineField);
 
+// 10 AM save
+var saveTen = document.getElementById('10Save');
+var saveTenField = () => {
+  let tenText = ten.value;
+  localStorage.setItem("ten", tenText);
+  console.log(localStorage.getItem("ten"));
+}
+saveTen.addEventListener("click", saveTenField);
 
+// 11 AM save
+var saveEleven = document.getElementById('11Save');
+var saveElevenField = () => {
+  let elevenText = eleven.value;
+  localStorage.setItem("eleven", elevenText);
+  console.log(localStorage.getItem("eleven"));
+}
+saveEleven.addEventListener("click", saveElevenField);
 
+// 12 PM save
+var saveTwelve = document.getElementById('12Save');
+var saveTwelveField = () => {
+  let twelveText = twelve.value;
+  localStorage.setItem("twelve", twelveText);
+  console.log(localStorage.getItem("twelve"));
+}
+saveTwelve.addEventListener("click", saveTwelveField);
 
-    hourRow.append(hourContainer, taskContainer, saveContainer);
-})
+// 1 PM save
+var saveOne = document.getElementById('13Save');
+var saveOneField = () => {
+  let oneText = one.value;
+  localStorage.setItem("one", oneText);
+  console.log(localStorage.getItem("one"));
+}
+saveOne.addEventListener("click", saveOneField);
 
+// 2 PM save
+var saveTwo = document.getElementById('14Save');
+var saveTwoField = () => {
+  let twoText = two.value;
+  localStorage.setItem("two", twoText);
+  console.log(localStorage.getItem("two"));
+}
+saveTwo.addEventListener("click", saveTwoField);
+
+// 3 PM save
+var saveThree = document.getElementById('15Save');
+var saveThreeField = () => {
+  let threeText = three.value;
+  localStorage.setItem("three", threeText);
+  console.log(localStorage.getItem("three"));
+}
+saveThree.addEventListener("click", saveThreeField);
+
+// 4 PM save
+var saveFour = document.getElementById('16Save');
+var saveFourField = () => {
+  let fourText = four.value;
+  localStorage.setItem("four", fourText);
+  console.log(localStorage.getItem("four"));
+}
+saveFour.addEventListener("click", saveFourField);
+
+// 5 PM save
+var saveFive = document.getElementById('17Save');
+var saveFiveField = () => {
+  let fiveText = five.value;
+  localStorage.setItem("five", fiveText);
+  console.log(localStorage.getItem("five"));
+}
+saveFive.addEventListener("click", saveFiveField);
+
+// loads saved task for each time
+const updateContent = () => {
+    nine.innerHTML = localStorage.getItem("nine");
+    ten.innerHTML = localStorage.getItem("ten");
+    eleven.innerHTML = localStorage.getItem("eleven");
+    twelve.innerHTML = localStorage.getItem("twelve");
+    one.innerHTML = localStorage.getItem("one");
+    two.innerHTML = localStorage.getItem("two");
+    three.innerHTML = localStorage.getItem("three");
+    four.innerHTML = localStorage.getItem("four");
+    five.innerHTML = localStorage.getItem("five");
+  };
+
+  // updates page every 30 minutes
+  setInterval(function() {
+    window.location.reload();
+  }, 300000); 
+
+  updateContent();
